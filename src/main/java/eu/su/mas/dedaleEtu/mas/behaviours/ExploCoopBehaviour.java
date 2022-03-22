@@ -101,8 +101,8 @@ public class ExploCoopBehaviour extends SimpleBehaviour {
 				
 				//If no nextNode found will just says to him
 				if (nextNode == null) {
-					System.out.println(this.myAgent.getLocalName()+" ---> Sorry I'm not smart enough to find a knot to let you through");
-					//sendSorryMsg(); // Send of the Sorry msg
+					System.out.println(this.myAgent.getLocalName()+" ---> Sorry I'm not smart enough to find a node to let you through");
+					sendSorryMsg(); 
 					modeLeavePath = false;
 					leavePath= null;
 					return ; 
@@ -116,7 +116,7 @@ public class ExploCoopBehaviour extends SimpleBehaviour {
 						System.out.println(this.myAgent.getLocalName()+" ---> I found a node to go back ! Bye! ");
 					}else {
 						System.out.println(this.myAgent.getLocalName()+" ---> Sorry I found a node to back, but something is blocking me ");
-						//sendSorryMsg();
+						sendSorryMsg();
 						modeLeavePath = false;
 						leavePath= null;
 					}
@@ -184,7 +184,7 @@ public class ExploCoopBehaviour extends SimpleBehaviour {
 							nodeGoal = opennodes.get(rand.nextInt(opennodes.size()));
 							cpt_null=0;
 						}
-						temp = this.myMap.getShortestPath(myPosition, nodeGoal, ((ExploreCoopAgent)this.myAgent).blockedAgent);
+						temp = this.myMap.getShortestPath(myPosition, nodeGoal); //, ((ExploreCoopAgent)this.myAgent).blockedAgent
 
 						if (temp != null ) {
 							if (temp.size()>0) {
@@ -212,7 +212,7 @@ public class ExploCoopBehaviour extends SimpleBehaviour {
 						}
 					}
 					else {
-						temp = this.myMap.getShortestPathToClosestOpenNode(myPosition, ((ExploreCoopAgent)this.myAgent).blockedAgent);
+						temp = this.myMap.getShortestPathToClosestOpenNode(myPosition); //, ((ExploreCoopAgent)this.myAgent).blockedAgent
 						if (temp != null) {
 							nextNode = temp.get(0);
 						}else {
@@ -241,21 +241,21 @@ public class ExploCoopBehaviour extends SimpleBehaviour {
 				//4) At each time step, the agent blindly send all its graph to its surrounding to illustrate how to share its knowledge (the topology currently) with the the others agents. 	
 				// If it was written properly, this sharing action should be in a dedicated behaviour set, the receivers be automatically computed, and only a subgraph would be shared.
 
-//				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-//				msg.setProtocol("SHARE-TOPO");
-//				msg.setSender(this.myAgent.getAID());
-//				if (this.myAgent.getLocalName().equals("1stAgent")) {
-//					msg.addReceiver(new AID("2ndAgent",false));
-//				}else {
-//					msg.addReceiver(new AID("1stAgent",false));
-//				}
-//				SerializableSimpleGraph<String, MapAttribute> sg=this.myMap.getSerializableGraph();
-//				try {					
-//					msg.setContentObject(sg);
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//				((AbstractDedaleAgent)this.myAgent).sendMessage(msg);
+				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+				msg.setProtocol("SHARE-TOPO");
+				msg.setSender(this.myAgent.getAID());
+				if (this.myAgent.getLocalName().equals("1stAgent")) {
+					msg.addReceiver(new AID("2ndAgent",false));
+				}else {
+					msg.addReceiver(new AID("1stAgent",false));
+				}
+				SerializableSimpleGraph<String, MapAttribute> sg=this.myMap.getSerializableGraph();
+				try {					
+					msg.setContentObject(sg);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				((AbstractDedaleAgent)this.myAgent).sendMessage(msg);
 
 				//5) At each time step, the agent check if he received a graph from a teammate. 	
 				// If it was written properly, this sharing action should be in a dedicated behaviour set.
@@ -278,6 +278,21 @@ public class ExploCoopBehaviour extends SimpleBehaviour {
 			}
 
 		}
+	
+	public void sendSorryMsg() {
+		if (receiveAgentName != null) {
+			ACLMessage sendMsg=new ACLMessage(ACLMessage.INFORM);
+			sendMsg.setProtocol("ProtocoleSorry");
+			sendMsg.setSender(this.myAgent.getAID());
+
+			sendMsg.setContent(((AbstractDedaleAgent)this.myAgent).getCurrentPosition());
+
+			sendMsg.addReceiver(new AID(receiveAgentName,AID.ISLOCALNAME));
+
+			//Mandatory to use this method (it takes into account the environment to decide if someone is reachable or not)
+			((AbstractDedaleAgent)this.myAgent).sendMessage(sendMsg);
+		}
+	}
 
 	@Override
 	public boolean done() {
