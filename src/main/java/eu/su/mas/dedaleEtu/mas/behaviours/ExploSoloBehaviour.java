@@ -112,7 +112,7 @@ public class ExploSoloBehaviour extends SimpleBehaviour {
 				if (nextNode==null){
 					//no directly accessible openNode
 					//chose one, compute the path and take the first step.
-					nextNode=this.myMap.getShortestPath(myPosition, this.openNodes.get(0)).get(0);
+					//nextNode=this.myMap.getShortestPath(myPosition, this.openNodes.get(0)).get(0);
 				}
 				
 				

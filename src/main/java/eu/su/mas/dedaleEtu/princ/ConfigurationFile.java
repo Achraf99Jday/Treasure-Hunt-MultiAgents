@@ -21,17 +21,14 @@ public final class ConfigurationFile {
 	 * 1) Network and platform parameters
 	 * 
 	 ***********************************/
-	
-	//Distributed or not, and is the current computer in charge of the main-container
+
 	public static boolean PLATFORMisDISTRIBUTED= false;
 	public static boolean COMPUTERisMAIN= true;
 
-	//network configuration
 	public static String PLATFORM_HOSTNAME="127.0.0.1";
 	public static String PLATFORM_ID="Ithaq";
 	public static Integer PLATFORM_PORT=8887;
 	
-	//List of containers to be created on the current computer
 	public static String LOCAL_CONTAINER_NAME=PLATFORM_ID+"_"+"container1";
 	public static String LOCAL_CONTAINER2_NAME=PLATFORM_ID+"_"+"container2";
 	public static String LOCAL_CONTAINER3_NAME=PLATFORM_ID+"_"+"container3";
@@ -50,11 +47,12 @@ public final class ConfigurationFile {
 	 */
 	public static EnvironmentType ENVIRONMENT_TYPE=EnvironmentType.GS;
 	
+	
 	/**
 	 * The environment is either manually designed, or generated with a specific generator
 	 */
 	public static GeneratorType GENERATOR_TYPE=GeneratorType.MANUAL;
-
+	//public static GeneratorType GENERATOR_TYPE=GeneratorType.GS_GRID;
 	/**
 	 * 	The GateKeeper is in charge of the Platform and of the agents within, do not change its name.
 	 */
@@ -77,26 +75,25 @@ public final class ConfigurationFile {
 	
 	//public static String INSTANCE_TOPOLOGY="resources/topology/map2020-topologyExam1-graph.dgs";
 	//public static String INSTANCE_TOPOLOGY="resources/topology/HouatTopology";
-	//public static String INSTANCE_TOPOLOGY="resources/topology/map2018-topology-ica";
-	//public static String INSTANCE_TOPOLOGY="resources/topology/map2021-topologyExam1-tree.dgs";
-	public static String INSTANCE_TOPOLOGY="resources/topology/mapInterlocking2-topology";
-	//public static String INSTANCE_TOPOLOGY="resources/topology/map2021-topologyExam1-graph.dgs";
-	//public static String INSTANCE_TOPOLOGY="resources/map2018-topology";
-	//public static String INSTANCE_TOPOLOGY="resources/map2019-topologyExam1";
+	public static String INSTANCE_TOPOLOGY="resources/topology/map2018-topology-ica";
+	//public static String INSTANCE_TOPOLOGY="resources/topology/map2020-topologyExam1-tree.dgs";
+	//public static String INSTANCE_TOPOLOGY="resources/topology/mapInterlocking2-topology";
+	//public static String INSTANCE_TOPOLOGY="resources/topology/map2018-topology";
+	//public static String INSTANCE_TOPOLOGY="resources/topology/map2019-topologyExam1";
 
 	
 	/**
 	 * Give the elements available on the map, if any
 	 */
-	//public static String INSTANCE_CONFIGURATION_ELEMENTS=null;
 	// If the environment is loaded but you do not want to define elements on the map
-	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/distributedExploration/emptyMap";
+	//public static String INSTANCE_CONFIGURATION_ELEMENTS=null;
+	public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/distributedExploration/emptyMap";
 	
 	// otherwise
 	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/treasureHunt/map2019-elementsExam1";
 	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/treasureHunt/Houat-elements";
 	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/treasureHunt/map2018-elements-ica";
-	public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/interlocking/mapInterlocking2-elements";
+	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/interlocking/mapInterlocking2-elements";
 	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/map2018-elements";
 	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/mapInterlocking2-elements";
 	
@@ -113,7 +110,7 @@ public final class ConfigurationFile {
 	/**
 	 * Size of the generated environment, mandatory
 	 */
-	public static Integer ENVIRONMENT_SIZE=10;
+	public static Integer ENVIRONMENT_SIZE=3;
 	// Parameters required for some generators (see dedale.gitlab.io)
 	public static Integer OPTIONAL_ADDITIONAL_ENVGENERATOR_PARAM1=1;//used by the BARABASI_ALBERT generator to know the number of childs
 	public static Integer[] GENERATOR_PARAMETERS= {ENVIRONMENT_SIZE,OPTIONAL_ADDITIONAL_ENVGENERATOR_PARAM1};
@@ -133,9 +130,11 @@ public final class ConfigurationFile {
 	 * Elements on the map
 	 */
 	
+	/**true if a grid environment should be generated, false otherwise (A dogoronev env is generated)**/
+	
 	public static boolean ACTIVE_WELL=false;
 	public static boolean ACTIVE_GOLD=true;
-	public static boolean ACTIVE_DIAMOND=false;
+	public static boolean ACTIVE_DIAMOND=true;
 
 	/************************************
 	 ************************************
@@ -148,19 +147,16 @@ public final class ConfigurationFile {
 	 * Must'nt be null as it describes the native agents' capabilities 
 	 */
 	//public static String INSTANCE_CONFIGURATION_ENTITIES=null;
-	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/agentExplo2";
+	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/agentExplo";
 	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/agentExplo-2";
-	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/agentExploCoop-2";
-	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/agentExploCoop-2.json";
+	public static String INSTANCE_CONFIGURATION_ENTITIES="resources/agentExploCoop-2";
 	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/agentKeyboardControlled";
 	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/hunt/map2020-entitiesTree";
-	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/hunt/map2021-entitiesTree";
 	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/hunt/map2020-entitiesGraph";
-	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/hunt/map2021-entitiesGraph";
 	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/map2018-entities2";
 	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/map2019-entitiesExam1";
 	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/monoAgent-entities";
-	public static String INSTANCE_CONFIGURATION_ENTITIES="resources/interlocking/mapInterlocking2-entities";
+	//public static String INSTANCE_CONFIGURATION_ENTITIES="resources/mapInterlocking2-entities";
 	//public static String INSTANCE_CONFIGURATION_ENTITIES=null;
 	
 

@@ -7,8 +7,13 @@ import eu.su.mas.dedale.mas.AbstractDedaleAgent;
 import eu.su.mas.dedale.mas.agent.behaviours.startMyBehaviours;
 
 import eu.su.mas.dedaleEtu.mas.behaviours.ExploCoopBehaviour;
+import eu.su.mas.dedaleEtu.mas.behaviours.ReceiveMapBehaviour;
+import eu.su.mas.dedaleEtu.mas.behaviours.ReceivePokeBehaviour;
+import eu.su.mas.dedaleEtu.mas.behaviours.SayHelloBehaviour;
+import eu.su.mas.dedaleEtu.mas.behaviours.ShareMapBehaviour;
+import eu.su.mas.dedaleEtu.mas.behaviours.ShareNextExplorationBehaviour;
 import eu.su.mas.dedaleEtu.mas.knowledge.MapRepresentation;
-
+import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 
 /**
@@ -38,11 +43,13 @@ public class ExploreCoopAgent extends AbstractDedaleAgent {
 	private static final long serialVersionUID = -7969469610241668140L;
 	private MapRepresentation myMap;
 	
-	private List<String> list_agentName;
+	public boolean move=true, succesMerge=false, changeNode=false;
+	public String nextNode = "";
+	
+	private List<String> list_agentNames;
+	
 	private List<Behaviour> lb;
-	public String nextNode;
-	public boolean forceChangeNode=false, successMerge=false;
-	public List<String> blockedAgent=new ArrayList<String>();
+
 	/**
 	 * This method is automatically called when "agent".start() is executed.
 	 * Consider that Agent is launched for the first time. 
@@ -54,7 +61,6 @@ public class ExploreCoopAgent extends AbstractDedaleAgent {
 
 		super.setup();
 		
-		//get the parameters added to the agent at creation (if any)
 		final Object[] args = getArguments();
 		
 		List<String> list_agentNames=new ArrayList<String>();
@@ -69,8 +75,9 @@ public class ExploreCoopAgent extends AbstractDedaleAgent {
 				i++;
 			}
 		}
-
-		List<Behaviour> lb=new ArrayList<Behaviour>();
+		this.list_agentNames = list_agentNames;
+		
+		this.lb=new ArrayList<Behaviour>();
 		
 		/************************************************
 		 * 
@@ -78,16 +85,19 @@ public class ExploreCoopAgent extends AbstractDedaleAgent {
 		 * 
 		 ************************************************/
 		
-		lb.add(new ExploCoopBehaviour(this,this.myMap,list_agentNames));
+		this.lb.add(new ExploCoopBehaviour(this,this.myMap,5000));
+		this.lb.add(new SayHelloBehaviour(this,list_agentNames));
+		this.lb.add(new ReceivePokeBehaviour(this,list_agentNames));
+		//this.lb.add(new ReceiveMapBehaviour(this));
+		this.lb.add(new ShareNextExplorationBehaviour(this));
 
-		
 		
 		/***
 		 * MANDATORY TO ALLOW YOUR AGENT TO BE DEPLOYED CORRECTLY
 		 */
 		
 		
-		addBehaviour(new startMyBehaviours(this,lb));
+		addBehaviour(new startMyBehaviours(this,this.lb));
 		
 		System.out.println("the  agent "+this.getLocalName()+ " is started");
 
@@ -101,16 +111,16 @@ public class ExploreCoopAgent extends AbstractDedaleAgent {
 		return this.myMap;
 	}
 	
-	public List<String> getList_AgentNames() {
-		return this.list_agentName;
+	public List<String> getList_AgentNames(){
+		return this.list_agentNames;
 	}
 	
-	public List<Behaviour> getLB() {
+	public List<Behaviour> getLB(){
 		return this.lb;
 	}
 	
 	public boolean getFinished() {
-		if (!this.myMap.hasOpenNode()) {
+		if (!this.myMap.hasOpenNode()){
 			return true;
 		}
 		return false;
