@@ -493,7 +493,7 @@ public class Principal {
 		Object [] entityParametersC1={"My parameters"};
 //		
 //		//4) Give the class name of your agent to let the system instantiate it
-		ag=createNewDedaleAgent(c, agentName, DummyCollectorAgent.class.getName(), entityParametersC1);
+		ag=createNewDedaleAgent(c, agentName, CollectAgent.class.getName(), entityParametersC1);
 		agentList.add(ag);
 		
 
@@ -508,7 +508,7 @@ public class Principal {
 		Object [] entityParametersC2={"My parameters"};
 //		
 //		//4) Give the class name of your agent to let the system instantiate it
-		ag=createNewDedaleAgent(c, agentName, DummyCollectorAgent.class.getName(), entityParametersC2);
+		ag=createNewDedaleAgent(c, agentName, CollectAgent.class.getName(), entityParametersC2);
 		agentList.add(ag);
 		
 //		//1) Get the container where the agent will appear
@@ -522,7 +522,7 @@ public class Principal {
 		Object [] entityParametersC3={"My parameters"};
 //		
 //		//4) Give the class name of your agent to let the system instantiate it
-		ag=createNewDedaleAgent(c, agentName, DummyCollectorAgent.class.getName(), entityParametersC3);
+		ag=createNewDedaleAgent(c, agentName, CollectAgent.class.getName(), entityParametersC3);
 		agentList.add(ag);
 		/***************
 		 * AGENT Tanker
