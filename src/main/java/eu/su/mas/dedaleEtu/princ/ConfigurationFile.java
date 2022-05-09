@@ -73,14 +73,14 @@ public final class ConfigurationFile {
 	 */
 	//public static String INSTANCE_TOPOLOGY=null;
 	
-	//public static String INSTANCE_TOPOLOGY="resources/topology/map2020-topologyExam1-graph.dgs";
+	public static String INSTANCE_TOPOLOGY="resources/topology/map2020-topologyExam1-graph.dgs";
 	//public static String INSTANCE_TOPOLOGY="resources/topology/HouatTopology";
 	//public static String INSTANCE_TOPOLOGY="resources/topology/map2018-topology-ica";
 	//public static String INSTANCE_TOPOLOGY="resources/topology/map2020-topologyExam1-tree.dgs";
-	public static String INSTANCE_TOPOLOGY="resources/topology/mapInterlocking2-topology";
+	//public static String INSTANCE_TOPOLOGY="resources/topology/mapInterlocking2-topology";
 	//public static String INSTANCE_TOPOLOGY="resources/topology/map2018-topology";
-	//public static String INSTANCE_TOPOLOGY="resources/topology/map2019-topologyExam1";
-
+	
+	//public static String INSTANCE_TOPOLOGY="map2022-topologyExam.dgs";
 	
 	/**
 	 * Give the elements available on the map, if any
@@ -96,6 +96,8 @@ public final class ConfigurationFile {
 	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/interlocking/mapInterlocking2-elements";
 	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/map2018-elements";
 	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/mapInterlocking2-elements";
+	
+	//public static String INSTANCE_CONFIGURATION_ELEMENTS="resources/treasureHunt/map2022-elements";
 	
 	
 	
@@ -170,5 +172,7 @@ public final class ConfigurationFile {
 	//public static String INSTANCE_CONFIGURATION_ENTITIES="src/test/java/resources/map2018-agentGolem";
 	//public static String INSTANCE_CONFIGURATION_ENTITIES="src/test/java/resources/map2018-agentTankerCollect";
 	//public static String INSTANCE_CONFIGURATION_ENTITIES="src/test/java/resources/map2019-entitiesExam1";
+	
+	//public static String INSTANCE_CONFIGURATION_ENTITIES="src/test/java/resources/map2022-entities.json";
 
 }

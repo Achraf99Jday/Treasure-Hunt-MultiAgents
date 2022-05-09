@@ -12,7 +12,7 @@ import org.graphstream.graph.Node;
 import dataStructures.tuple.Couple;
 import eu.su.mas.dedale.env.Observation;
 import eu.su.mas.dedale.mas.AbstractDedaleAgent;
-import eu.su.mas.dedaleEtu.mas.agents.AgentInterface;
+import eu.su.mas.dedaleEtu.mas.agents.dummies.explo.AgentInterface;
 import eu.su.mas.dedaleEtu.mas.knowledge.MapRepresentation;
 import jade.core.AID;
 import jade.core.Agent;
@@ -20,7 +20,7 @@ import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
 
 
-import eu.su.mas.dedaleEtu.mas.agents.TankerAgent;
+import eu.su.mas.dedaleEtu.mas.agents.dummies.explo.TankerAgent;
 
 public class DecisionMaking extends SimpleBehaviour{
 
@@ -58,12 +58,12 @@ public class DecisionMaking extends SimpleBehaviour{
 		int localStrengh = 0;
 		int localLock = 0;
 		
-		int i; // première boucle
+		int i; // premiï¿½re boucle
 		for(i = 0; i < this.ListeTresor.size(); i++) { // On parcours les tresors
 			Observation tresor_type = this.ListeTresor.get(i).getRight().get(0).getLeft();
 			Integer value = this.ListeTresor.get(i).getRight().get(0).getRight();
 			int j;
-			for(j=0;j<this.ListeTresor.get(i).getRight().size();j++) { // On parcours les attributs des trésors
+			for(j=0;j<this.ListeTresor.get(i).getRight().size();j++) { // On parcours les attributs des trï¿½sors
 				int k;
 				switch(this.ListeTresor.get(i).getRight().get(j).getLeft()) {
 				case DIAMOND:
@@ -81,8 +81,8 @@ public class DecisionMaking extends SimpleBehaviour{
 							default:
 								
 							}
-							int diff = Math.abs(backpack - value); // On regarde si c'est le meilleur résultat possible
-							if(diff < bestValue) { // On enregistre le résulta
+							int diff = Math.abs(backpack - value); // On regarde si c'est le meilleur rï¿½sultat possible
+							if(diff < bestValue) { // On enregistre le rï¿½sulta
 								best_Collect = l;
 								best_tresor = i;
 								bestValue = diff;
@@ -121,7 +121,7 @@ public class DecisionMaking extends SimpleBehaviour{
 			}
 		}
 		
-		if(best_tresor >= 0 && best_Collect >= 0) { // On vérifie qu'n couple a ete trouver
+		if(best_tresor >= 0 && best_Collect >= 0) { // On vï¿½rifie qu'n couple a ete trouver
 			String chosenOne = this.ListeAgent.get(best_Collect).getLeft(); // On enregistre le collect choisit
 		
 			int j;
@@ -138,11 +138,11 @@ public class DecisionMaking extends SimpleBehaviour{
 				}
 			}
 			
-			List<Couple<String,Integer>> Liste_Selection = new ArrayList<Couple<String,Integer>>(); // On y enregistrera la liste de agents selectionné
+			List<Couple<String,Integer>> Liste_Selection = new ArrayList<Couple<String,Integer>>(); // On y enregistrera la liste de agents selectionnï¿½
 				
 			Integer k = 0; // servira a garder les index des agents selectionne
 				
-			while(localStrengh > 0 && localLock > 0 && k < this.ListeAgent.size()){ // tant que les capacités necessaire ne sont pas attente et que l'on a pas pris tous les agents présent
+			while(localStrengh > 0 && localLock > 0 && k < this.ListeAgent.size()){ // tant que les capacitï¿½s necessaire ne sont pas attente et que l'on a pas pris tous les agents prï¿½sent
 				
 				int oldStrengh = localStrengh;
 				int oldLock = localLock;
@@ -153,7 +153,7 @@ public class DecisionMaking extends SimpleBehaviour{
 					case "Strengh":
 						if(localStrengh != 0 && this.ListeAgent.get(k).getRight().get(j).getRight() != 0) { // SI la force n'est pas nulle et la capacite differente de nulle 
 							localStrengh -= this.ListeAgent.get(k).getRight().get(j).getRight();			// On diminue localStrengh
-							if(localStrengh<0) {															// Si on descend en dessous de 0 On repositionne à 0
+							if(localStrengh<0) {															// Si on descend en dessous de 0 On repositionne ï¿½ 0
 								localStrengh = 0;
 							}
 						}
@@ -190,7 +190,8 @@ public class DecisionMaking extends SimpleBehaviour{
 
 					e.printStackTrace();
 				}
-				Iterator<Node> iter = this.mapReceiver.getGraph().getNode(this.ListeTresor.get(best_tresor).getLeft()).getNeighborNodeIterator(); // On parcour les noeud voisin de l'objectif 
+				@SuppressWarnings("unchecked")
+				Iterator<Node> iter = (Iterator<Node>) this.mapReceiver.getGraph().getNode(this.ListeTresor.get(best_tresor).getLeft()).neighborNodes(); // On parcour les noeud voisin de l'objectif 
 				while(iter.hasNext() || Liste_Selection.size() != 0) { // On attribut un noeud a chaque agent
 					Couple<String, List<Couple<Observation, Integer>>> node =(Couple<String, List<Couple<Observation, Integer>>>) iter.next();
 					ACLMessage msg1=new ACLMessage(ACLMessage.INFORM);

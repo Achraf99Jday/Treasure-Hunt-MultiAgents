@@ -45,7 +45,7 @@ public class MapRepresentation implements Serializable {
 	 */
 
 	public enum MapAttribute {	
-		agent,open,closed;
+		agent,open,closed, DIAMOND, GOLD;
 
 	}
 
@@ -64,7 +64,9 @@ public class MapRepresentation implements Serializable {
 	private Viewer viewer; //ref to the display,  non serializable
 	private Integer nbEdges, nbEdges2 = 0;//used to generate the edges ids
 
-	private SerializableSimpleGraph<String, MapAttribute> sg, clone;//used as a temporary dataStructure during migration
+	public SerializableSimpleGraph<String, MapAttribute> sg;//used as a temporary dataStructure during migration
+
+	private SerializableSimpleGraph<String, MapAttribute> clone;
 	
 	public MapRepresentation() {
 		//System.setProperty("org.graphstream.ui.renderer","org.graphstream.ui.j2dviewer.J2DGraphRenderer");
@@ -459,4 +461,42 @@ public class MapRepresentation implements Serializable {
 		return shortestPath;
 	}
 
+
+	/**
+	 * Add the node id if not already existing
+	 * @param id
+	 */
+	public void addNode(String id){
+		Node n=this.g.getNode(id);
+		if(n==null){
+			n=this.g.addNode(id);
+		}else{
+			n.clearAttributes();
+		}
+		//n.addAttribute("ui.label",id);
+	}
+
+
+
+	public Graph getGraph() {
+		return this.g;
+	}
+
+	
+	public List<String> getShortestPathCollect(String idFrom,String idTo){
+		List<String> shortestPath=new ArrayList<String>();
+
+		Dijkstra dijkstra = new Dijkstra();//number of edge
+		dijkstra.init(g);
+		dijkstra.setSource(g.getNode(idFrom));
+		dijkstra.compute();//compute the distance to all nodes from idFrom
+		List<Node> path=dijkstra.getPath(g.getNode(idTo)).getNodePath(); //the shortest path from idFrom to idTo
+		Iterator<Node> iter=path.iterator();
+		while (iter.hasNext()){
+			shortestPath.add(iter.next().getId());
+		}
+		dijkstra.clear();
+		shortestPath.remove(0);//remove the current position
+		return shortestPath;
+	}
 }

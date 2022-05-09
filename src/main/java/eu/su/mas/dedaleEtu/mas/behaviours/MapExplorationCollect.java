@@ -14,7 +14,8 @@ import eu.su.mas.dedaleEtu.mas.knowledge.MapRepresentation.MapAttribute;
 import jade.core.behaviours.SimpleBehaviour;
 
 
-public class MapExploration extends SimpleBehaviour {
+
+public class MapExplorationCollect extends SimpleBehaviour {
 
 	private static final long serialVersionUID = 8567689731496787661L;
 
@@ -26,7 +27,7 @@ public class MapExploration extends SimpleBehaviour {
 	private int exitValue;
 
 
-	public MapExploration(final AbstractDedaleAgent myagent) {
+	public MapExplorationCollect(final AbstractDedaleAgent myagent) {
 		super(myagent);
 
 		this.openNodes=new ArrayList<String>();

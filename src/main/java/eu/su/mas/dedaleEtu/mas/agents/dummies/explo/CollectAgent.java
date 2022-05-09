@@ -1,5 +1,4 @@
-package eu.su.mas.dedaleEtu.mas.agents;
-
+package eu.su.mas.dedaleEtu.mas.agents.dummies.explo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -64,8 +63,8 @@ public class CollectAgent extends AbstractDedaleAgent implements AgentInterface 
 		this.capacities = new ArrayList<>();
 		if(this.getBackPackFreeSpace() != null )
 		{
-			this.capacities.add(new Couple<>("GoldCapacity", Math.max(0, this.getBackPackFreeSpace())));
-			this.capacities.add(new Couple<>("DiamondCapacity", Math.max(0, this.getBackPackFreeSpace())));
+			this.capacities.add(new Couple<>("GoldCapacity", 200));
+			this.capacities.add(new Couple<>("DiamondCapacity", 200));
 		}
 		Set<Couple<Observation, Integer>> expertises = this.getMyExpertise();
 		for(Couple<Observation, Integer> exp : expertises)

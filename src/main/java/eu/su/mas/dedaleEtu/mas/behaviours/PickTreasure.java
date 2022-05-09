@@ -9,10 +9,12 @@ import java.util.List;
 import dataStructures.tuple.Couple;
 import eu.su.mas.dedale.env.Observation;
 import eu.su.mas.dedale.mas.AbstractDedaleAgent;
-import eu.su.mas.dedaleEtu.mas.agents.AgentInterface;
+import eu.su.mas.dedaleEtu.mas.agents.dummies.explo.AgentInterface;
 import jade.core.AID;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.lang.acl.ACLMessage;
+
+
 
 public class PickTreasure extends SimpleBehaviour {
 
