@@ -1,7 +1,7 @@
 [
 { 
   "agentType":"agentExplo",
-  "agentName": "1stAgent",
+  "agentName": "A1",
   "communicationRange": 3,
   "initialLocation": "M30",
   "backPackCapacityGold": 0,
@@ -12,7 +12,7 @@
   },
 { 
   "agentType":"agentExplo",
-  "agentName": "2ndAgent",
+  "agentName": "A2",
   "communicationRange": 4,
   "initialLocation": "94",
   "backPackCapacityGold": 0,
@@ -23,7 +23,7 @@
   },
 { 
   "agentType":"agentExplo",
-  "agentName": "3rdAgent",
+  "agentName": "A3",
   "communicationRange": 2,
   "initialLocation": "47",
   "backPackCapacityGold": 0,

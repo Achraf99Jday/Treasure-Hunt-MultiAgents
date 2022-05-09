@@ -1,6 +1,5 @@
 package eu.su.mas.dedaleEtu.mas.agents.dummies;
 
-
 import eu.su.mas.dedale.env.Observation;
 import eu.su.mas.dedale.mas.AbstractDedaleAgent;
 import eu.su.mas.dedale.mas.agent.behaviours.startMyBehaviours;
@@ -121,6 +120,8 @@ public class DummyCollectorAgent extends AbstractDedaleAgent{
 						System.out.println(this.myAgent.getLocalName()+" - My treasure type is : "+((AbstractDedaleAgent) this.myAgent).getMyTreasureType());
 						System.out.println(this.myAgent.getLocalName()+" - My current backpack capacity is:"+ ((AbstractDedaleAgent) this.myAgent).getBackPackFreeSpace());
 						System.out.println(this.myAgent.getLocalName()+" - Value of the treasure on the current position: "+o.getLeft() +": "+ o.getRight());
+						System.out.println(this.myAgent.getLocalName()+" - The agent unlocked :"+((AbstractDedaleAgent) this.myAgent).openLock(Observation.GOLD));
+						System.out.println(this.myAgent.getLocalName()+" - The agent unlocked :"+((AbstractDedaleAgent) this.myAgent).openLock(Observation.DIAMOND));
 						System.out.println(this.myAgent.getLocalName()+" - The agent grabbed :"+((AbstractDedaleAgent) this.myAgent).pick());
 						System.out.println(this.myAgent.getLocalName()+" - the remaining backpack capacity is: "+ ((AbstractDedaleAgent) this.myAgent).getBackPackFreeSpace());
 						b=true;
